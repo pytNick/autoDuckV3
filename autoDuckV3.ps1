@@ -43,11 +43,11 @@ function Download-Resources {
 		mkdir C:\SippicomInstall\assoc
 	}
 	$ProgressPreference = 'silentlyContinue'
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 	Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall -Force
 	Remove-Item C:\SippicomInstall\Setups.zip
 	
