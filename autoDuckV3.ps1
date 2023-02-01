@@ -43,11 +43,11 @@ function Download-Resources {
 		mkdir C:\SippicomInstall\assoc
 	}
 	$ProgressPreference = 'silentlyContinue'
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
-	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Setups.zip -OutFile C:\SippicomInstall\Setups.zip
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/SetUserFTA.exe -OutFile C:\SippicomInstall\SetUserFTA.exe
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
+	Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 	Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall -Force
 	Remove-Item C:\SippicomInstall\Setups.zip
 	
@@ -63,13 +63,13 @@ function Install-DefaultPrograms {
 	Write-Host -BackgroundColor Green -ForegroundColor White "7-Zip installation done!"
 	Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
 	if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
-		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
+		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 	}
 	C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\VLCassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "VLC installation done!"
 	Start-Process C:\SippicomInstall\readerdc_de_xa_crd_install.exe -Wait
 	if(!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
-		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
+		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
 	}
 	C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Acroassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "Acrobat Reader installation done!"
@@ -117,10 +117,10 @@ do {
 			$imgURL = "https://imgur.com/TUwv8kH.jpg"
 			Invoke-WebRequest -Uri $imgURL -OutFile $env:TEMP\PSLockScreenWallpaper.jpg
 			Copy-Item $env:TEMP\PSLockScreenWallpaper.jpg "C:\Windows\System32\LockScreen.jpg" -Force
-			New-Item -Path REGISTRY::HKEY_LOCAL_MACHINE:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP -Force | Out-Null
-			New-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP -Name "LockScreenImageStatus" -Value "1" -PropertyType DWORD -Force | Out-Null
-        	New-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP -Name "LockScreenImagePath" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
-        	New-ItemProperty -Path REGISTRY::HKEY_LOCAL_MACHINE:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP -Name "LockScreenImageUrl" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
+			New-Item -Path "REGISTRY::HKEY_LOCAL_MACHINE:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Force | Out-Null
+			New-ItemProperty -Path "REGISTRY::HKEY_LOCAL_MACHINE:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImageStatus" -Value "1" -PropertyType DWORD -Force | Out-Null
+        	New-ItemProperty -Path "REGISTRY::HKEY_LOCAL_MACHINE:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImagePath" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
+        	New-ItemProperty -Path "REGISTRY::HKEY_LOCAL_MACHINE:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImageUrl" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
 		}
 		'4' {
 			Download-Resources
@@ -139,7 +139,7 @@ do {
 			}
 			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
 			if(!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
-				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
+				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
 			
@@ -152,15 +152,15 @@ do {
 				mkdir C:\SippicomInstall\assoc
 			}
 			if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
-				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
+				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\VLCassoc.txt
 			if(!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
-				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
+				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Acroassoc.txt
 			if(!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
-				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
+				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
 			
@@ -169,7 +169,7 @@ do {
 			switch ($qKey.Character) {
 				'y' {
 					if(!(Test-Path C:\SippicomInstall\assoc\assoc.bat)) {
-						Invoke-WebRequest https://github.com/pytNick/autoDuckV3/blob/FunkyMonkey/resources/assoc.bat -OutFile C:\SippicomInstall\assoc\assoc.bat
+						Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/assoc.bat -OutFile C:\SippicomInstall\assoc\assoc.bat
 					}
 					Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name '!SetAssociations' -Value "C:\SippicomInstall\assoc\assoc.bat"
 					Break;
