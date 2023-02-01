@@ -117,10 +117,10 @@ do {
 			$imgURL = "https://imgur.com/TUwv8kH.jpg"
 			Invoke-WebRequest -Uri $imgURL -OutFile $env:TEMP\PSLockScreenWallpaper.jpg
 			Copy-Item $env:TEMP\PSLockScreenWallpaper.jpg "C:\Windows\System32\LockScreen.jpg" -Force
-			New-Item -Path "REGISTRY::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Force | Out-Null
-			New-ItemProperty -Path "REGISTRY::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImageStatus" -Value "1" -PropertyType DWORD -Force | Out-Null
-        	New-ItemProperty -Path "REGISTRY::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImagePath" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
-        	New-ItemProperty -Path "REGISTRY::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImageUrl" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
+			New-Item -Path "REGISTRY::HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Force | Out-Null
+			New-ItemProperty -Path "REGISTRY::HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImageStatus" -Value "1" -PropertyType DWORD -Force | Out-Null
+        	New-ItemProperty -Path "REGISTRY::HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImagePath" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
+        	New-ItemProperty -Path "REGISTRY::HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImageUrl" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
 		}
 		'4' {
 			Download-Resources
