@@ -2,7 +2,7 @@ function Show-MainMenu {
 	param (
 		
 	)
-	Clear-Host
+	# Clear-Host
 	Write-Host -NoNewLine -ForegroundColor Green 'Username: '
 	Write-Host $env:USERNAME
 	Write-Host -NoNewLine -ForegroundColor Green 'Computername: '
@@ -35,7 +35,7 @@ function Download-Resources {
 	param (
 		
 	)
-	Clear-Host
+	# Clear-Host
 	if(!(Test-Path C:\SippicomInstall)) {
 		mkdir C:\SippicomInstall
 	}
@@ -51,7 +51,7 @@ function Download-Resources {
 	Expand-Archive -LiteralPath C:\SippicomInstall\Setups.zip -DestinationPath C:\SippicomInstall -Force
 	Remove-Item C:\SippicomInstall\Setups.zip
 	
-	Clear-Host
+	# Clear-Host
 	Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
 }
 
@@ -95,13 +95,13 @@ do {
 	$key = $Host.UI.RawUI.ReadKey()
 	switch ($key.Character) {
 		'1' {
-			Clear-Host
+			# Clear-Host
 			Get-NetIPConfiguration |
 			Where-Object {$_.InterfaceAlias -notlike '*Bluetooth*' -and $_.InterfaceAlias -notlike '*Virtual*' } |
 			Select-Object @{Name='<==================';Expression={}},@{Name='Interface';Expression={$_.InterfaceAlias}},@{Name='IP';Expression={$_.IPv4Address}},@{Name='Gateway';Expression={$_.IPv4DefaultGateway.NextHop}},@{Name='DNS';Expression={$_.DNSServer.ServerAddresses}},@{Name='==================>';Expression={}}
 		}
 		'2' {
-			Clear-Host
+			# Clear-Host
 			$imgURL = "https://imgur.com/cRJzKUS.jpg"
 			New-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name WallpaperStyle -PropertyType String -Value 0 -Force
 			New-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name TileWallpaper -PropertyType String -Value 0 -Force
@@ -109,11 +109,11 @@ do {
 			Invoke-WebRequest -Uri $imgURL -OutFile $env:TEMP\PSWallpaper.jpg
 			[Params]::SystemParametersInfo(0x0014, 0, "$env:TEMP\PSWallpaper.jpg", (0x01 -bor 0x02))
 			
-			Clear-Host
+			# Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
 		}
 		'3' {
-			Clear-Host
+			# Clear-Host
 			$imgURL = "https://imgur.com/TUwv8kH.jpg"
 			Invoke-WebRequest -Uri $imgURL -OutFile $env:TEMP\PSLockScreenWallpaper.jpg
 			Copy-Item $env:TEMP\PSLockScreenWallpaper.jpg "C:\Windows\System32\LockScreen.jpg" -Force
@@ -126,14 +126,14 @@ do {
 			Download-Resources
 		}
 		'5' {
-			Clear-Host
+			# Clear-Host
 			if(!(Test-Path C:\SippicomInstall\7zip.msi) -Or !(Test-Path C:\SippicomInstall\VLC.msi) -Or !(Test-Path C:\SippicomInstall\readerdc64_de_hi_mdr_install.exe)) {
 				Download-Resources
 			}
 			Install-DefaultPrograms
 		}
 		'6' {
-			Clear-Host
+			# Clear-Host
 			if(!(Test-Path C:\SippicomInstall\OfficeSetup.exe)) {
 				Download-Resources
 			}
@@ -143,11 +143,11 @@ do {
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
 			
-			Clear-Host
+			# Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "Office installation done!"
 		}
 		'7' {
-			Clear-Host
+			# Clear-Host
 			if(!(Test-Path C:\SippicomInstall\assoc)) {
 				mkdir C:\SippicomInstall\assoc
 			}
@@ -179,11 +179,11 @@ do {
 				}
 			}
 
-			Clear-Host
+			# Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "File associations set!"
 		}
 		'8' {
-			Clear-Host
+			# Clear-Host
 			Get-PSDrive -PSProvider Registry
 
 			Set-ItemProperty -Type DWord -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name HideFileExt -value "0"
@@ -195,23 +195,23 @@ do {
 
 			taskkill /f /im explorer.exe
 			start explorer.exe
-			Clear-Host
+			# Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "Explorer view settings done!"
 		}
 		'9' {
-			Clear-Host
+			# Clear-Host
 		}
 		'0' {
-			Clear-Host
+			# Clear-Host
 			Show-UserScriptsMenu
 			do {
 					$uKey = $Host.UI.RawUI.ReadKey()
 					switch ($uKey.Character) {
 						'1' {
-							Clear-Host
+							# Clear-Host
 						}
 						'2' {
-							Clear-Host
+							# Clear-Host
 							Invoke-WebRequest https://raw.githubusercontent.com/pytNick/autoDuckV3NicK/FunkyMonkey/run.ps1 -OutFile $env:TEMP\nick.ps1
 							& {Start-Process PowerShell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $env:TEMP\nick.ps1" -Verb RunAs}
 						}
