@@ -17,12 +17,11 @@ function Show-MainMenu {
 ===== Options: =====
 	1) Show Network Information
 	2) Set Background
-	3) Set Lockscreen
-	4) Prepare Directory
-	5) Install Default Programs
-	6) Install Office
-	7) Set File associations
-	8) Set Explorer view settings
+	3) Prepare Directory
+	4) Install Default Programs
+	5) Install Office
+	6) Set File associations
+	7) Set Explorer view settings
 	...
 	0) User Scripts
 	...
