@@ -36,10 +36,10 @@ function Download-Resources {
 		
 	)
 	Clear-Host
-	if(!(Test-Path C:\SippicomInstall)) {
+	if (!(Test-Path C:\SippicomInstall)) {
 		mkdir C:\SippicomInstall
 	}
-	if(!(Test-Path C:\SippicomInstall\assoc)) {
+	if (!(Test-Path C:\SippicomInstall\assoc)) {
 		mkdir C:\SippicomInstall\assoc
 	}
 	$ProgressPreference = 'silentlyContinue'
@@ -62,13 +62,13 @@ function Install-DefaultPrograms {
 	Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\7zip.msi -qn" -Wait
 	Write-Host -BackgroundColor Green -ForegroundColor White "7-Zip installation done!"
 	Start-Process msiexec.exe -ArgumentList "-i C:\SippicomInstall\VLC.msi -qn" -Wait
-	if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
+	if (!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
 		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 	}
 	C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\VLCassoc.txt
 	Write-Host -BackgroundColor Green -ForegroundColor White "VLC installation done!"
 	Start-Process C:\SippicomInstall\readerdc64_de_hi_mdr_install.exe -Wait
-	if(!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
+	if (!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
 		Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
 	}
 	C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Acroassoc.txt
@@ -97,8 +97,8 @@ do {
 		'1' {
 			Clear-Host
 			Get-NetIPConfiguration |
-			Where-Object {$_.InterfaceAlias -notlike '*Bluetooth*' -and $_.InterfaceAlias -notlike '*Virtual*' } |
-			Select-Object @{Name='<==================';Expression={}},@{Name='Interface';Expression={$_.InterfaceAlias}},@{Name='IP';Expression={$_.IPv4Address}},@{Name='Gateway';Expression={$_.IPv4DefaultGateway.NextHop}},@{Name='DNS';Expression={$_.DNSServer.ServerAddresses}},@{Name='==================>';Expression={}}
+			Where-Object { $_.InterfaceAlias -notlike '*Bluetooth*' -and $_.InterfaceAlias -notlike '*Virtual*' } |
+			Select-Object @{Name = '<=================='; Expression = {} }, @{Name = 'Interface'; Expression = { $_.InterfaceAlias } }, @{Name = 'IP'; Expression = { $_.IPv4Address } }, @{Name = 'Gateway'; Expression = { $_.IPv4DefaultGateway.NextHop } }, @{Name = 'DNS'; Expression = { $_.DNSServer.ServerAddresses } }, @{Name = '==================>'; Expression = {} }
 		}
 		'2' {
 			Clear-Host
@@ -113,32 +113,22 @@ do {
 			Write-Host -BackgroundColor Green -ForegroundColor White "Done!"
 		}
 		'3' {
-			Clear-Host
-			$imgURL = "https://imgur.com/TUwv8kH.jpg"
-			Invoke-WebRequest -Uri $imgURL -OutFile $env:TEMP\PSLockScreenWallpaper.jpg
-			Copy-Item $env:TEMP\PSLockScreenWallpaper.jpg "C:\Windows\System32\LockScreen.jpg" -Force
-			New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Force | Out-Null
-			New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImageStatus" -Value "1" -PropertyType DWORD -Force | Out-Null
-        	New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImagePath" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
-        	New-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP" -Name "LockScreenImageUrl" -Value C:\Windows\System32\LockScreen.jpg -PropertyType STRING -Force | Out-Null
-		}
-		'4' {
 			Download-Resources
 		}
-		'5' {
+		'4' {
 			Clear-Host
-			if(!(Test-Path C:\SippicomInstall\7zip.msi) -Or !(Test-Path C:\SippicomInstall\VLC.msi) -Or !(Test-Path C:\SippicomInstall\readerdc64_de_hi_mdr_install.exe)) {
+			if (!(Test-Path C:\SippicomInstall\7zip.msi) -Or !(Test-Path C:\SippicomInstall\VLC.msi) -Or !(Test-Path C:\SippicomInstall\readerdc64_de_hi_mdr_install.exe)) {
 				Download-Resources
 			}
 			Install-DefaultPrograms
 		}
-		'6' {
+		'5' {
 			Clear-Host
-			if(!(Test-Path C:\SippicomInstall\OfficeSetup.exe)) {
+			if (!(Test-Path C:\SippicomInstall\OfficeSetup.exe)) {
 				Download-Resources
 			}
 			Start-Process C:\SippicomInstall\OfficeSetup.exe -Wait
-			if(!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
+			if (!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
 				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
@@ -146,20 +136,20 @@ do {
 			Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "Office installation done!"
 		}
-		'7' {
+		'6' {
 			Clear-Host
-			if(!(Test-Path C:\SippicomInstall\assoc)) {
+			if (!(Test-Path C:\SippicomInstall\assoc)) {
 				mkdir C:\SippicomInstall\assoc
 			}
-			if(!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
+			if (!(Test-Path C:\SippicomInstall\assoc\VLCassoc.txt)) {
 				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/VLCassoc.txt -OutFile C:\SippicomInstall\assoc\VLCassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\VLCassoc.txt
-			if(!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
+			if (!(Test-Path C:\SippicomInstall\assoc\Acroassoc.txt)) {
 				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Acroassoc.txt -OutFile C:\SippicomInstall\assoc\Acroassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Acroassoc.txt
-			if(!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
+			if (!(Test-Path C:\SippicomInstall\assoc\Officeassoc.txt)) {
 				Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/Officeassoc.txt -OutFile C:\SippicomInstall\assoc\Officeassoc.txt
 			}
 			C:\SippicomInstall\SetUserFTA.exe C:\SippicomInstall\assoc\Officeassoc.txt
@@ -168,7 +158,7 @@ do {
 			$qKey = $Host.UI.RawUI.ReadKey()
 			switch ($qKey.Character) {
 				'y' {
-					if(!(Test-Path C:\SippicomInstall\assoc\assoc.bat)) {
+					if (!(Test-Path C:\SippicomInstall\assoc\assoc.bat)) {
 						Invoke-WebRequest https://github.com/pytNick/autoDuckV3/raw/FunkyMonkey/resources/assoc.bat -OutFile C:\SippicomInstall\assoc\assoc.bat
 					}
 					Set-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce" -Name '!SetAssociations' -Value "C:\SippicomInstall\assoc\assoc.bat"
@@ -182,7 +172,7 @@ do {
 			Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "File associations set!"
 		}
-		'8' {
+		'7' {
 			Clear-Host
 			Get-PSDrive -PSProvider Registry
 
@@ -198,26 +188,26 @@ do {
 			Clear-Host
 			Write-Host -BackgroundColor Green -ForegroundColor White "Explorer view settings done!"
 		}
-		'9' {
+		'8' {
 			Clear-Host
 		}
 		'0' {
 			Clear-Host
 			Show-UserScriptsMenu
 			do {
-					$uKey = $Host.UI.RawUI.ReadKey()
-					switch ($uKey.Character) {
-						'1' {
-							Clear-Host
-						}
-						'2' {
-							Clear-Host
-							Invoke-WebRequest https://raw.githubusercontent.com/pytNick/autoDuckV3NicK/FunkyMonkey/run.ps1 -OutFile $env:TEMP\nick.ps1
-							& {Start-Process PowerShell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $env:TEMP\nick.ps1" -Verb RunAs}
-						}
+				$uKey = $Host.UI.RawUI.ReadKey()
+				switch ($uKey.Character) {
+					'1' {
+						Clear-Host
 					}
-				} until ($uKey.Character -eq 'q')
-			}
+					'2' {
+						Clear-Host
+						Invoke-WebRequest https://raw.githubusercontent.com/pytNick/autoDuckV3NicK/FunkyMonkey/run.ps1 -OutFile $env:TEMP\nick.ps1
+						& { Start-Process PowerShell.exe -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File $env:TEMP\nick.ps1" -Verb RunAs }
+					}
+				}
+			} until ($uKey.Character -eq 'q')
 		}
-		pause
+	}
+	pause
 } until($key.Character -eq 'q')
