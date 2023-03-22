@@ -12,7 +12,8 @@ function Show-MainMenu {
 	Write-Host -NoNewLine -ForegroundColor Green 'Windows Version: '
 	(Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion').ReleaseId
 	
-	Write-Host -ForegroundColor Green 'AutoDuck Version: V3.0.1'
+	Write-Host -NoNewLine -ForegroundColor Green 'AutoDuck Version: '
+	Write-Host -ForegroundColor White 'V3.0.2'
 
 	Write-Host @"
 
